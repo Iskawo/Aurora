@@ -1,0 +1,17 @@
+Here is how to add a cog;
+
+
+import discord
+from discord.ext import commands
+class COG_NAME_HERE(command.Cog):
+
+    def __init__(self, client):
+        self.client = client
+
+    @commands.command()
+    async def COMMAND_NAME_HERE(self, ctx):
+
+
+
+def setup(client):
+    client.add_cog(COG_NAME_HERE(client))
