@@ -85,6 +85,28 @@ class Fun(commands.Cog):
 
         await ctx.send(msg)
 
+    
+    @pat.error
+    async def pat_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            return await ctx.send(f'The user you entered was not found')
+    @love.error
+    async def love_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            return await ctx.send(f'The user you entered was not found')
+    @hug.error
+    async def hug_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            return await ctx.send(f'The user you entered was not found')
+    @slap.error
+    async def slap_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            return await ctx.send(f'The user you entered was not found')
+    @fight.error
+    async def fight_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            return await ctx.send(f'The user you entered was not found')
+
 
 def setup(client):
     client.add_cog(Fun(client))
