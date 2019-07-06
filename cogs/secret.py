@@ -35,8 +35,7 @@ class Secret(commands.Cog):
     async def reload(self, ctx, *, cog: str):
         """ - Command which Reloads a Module."""
         try:
-            self.client.unload_extension(f'cogs.{cog}')
-            self.client.load_extension(f'cogs.{cog}')
+            self.client.reload_extension(f'cogs.{cog}')
         except Exception as e:
             await ctx.send(f'{type(e).__name__} - {e}')
         else:
@@ -51,7 +50,29 @@ class Secret(commands.Cog):
         if inspect.isawaitable(res):
             await ctx.send(await res)
         else:
-            await ctx.send(res)
+            await ctx.send(f'```py\n{res}```')
+
+
+
+
+    @load.error
+    async def load_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please provide a cog to load.')
+    @unload.error
+    async def unload_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please provide a cog to unload.')
+    @reload.error
+    async def reload_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please provide a cog to reload.')
+    @eval.error
+    async def eval_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            return await ctx.send('Please provide some code to evaluate')
+        if isinstance(error, commands.CommandInvokeError):
+            return await ctx.send(f'{error}')
 
 
 def setup(client):
