@@ -78,10 +78,11 @@ class Miscellaneous(commands.Cog):
         embed.add_field(name="Prefix", value="My prefix is `-`", inline=False)
         embed.add_field(name="Fun", value="`Pat` - Give someone a pat **[-pat <user>]**\n`Love` - Give someone some love **[-love <user>]**\n`Hug` - Give someone a hug **[-hug <user>]**\n`Slap` - Slap someone **[-slap <user>]**\n`Fight` - Fight someone **[-fight <user>]**", inline=False)
         embed.add_field(name="Miscellaneous", value="`Ping` - Returns the message response time\n`Info` - Gives you information on Aurora\n`Help` - Shows this command\n`Userinfo` - Gives you information on a user **[-userinfo <user>]**", inline=False)
-        embed.add_field(name="Moderation", value="`Purge` - Delete a specified amount of messages **[-purge <amount>]**", inline=False)
+        embed.add_field(name="Moderation", value="`Purge` - Delete a specified amount of messages **[-purge <amount>]**\n`Kick` - Kick a user **[-kick <user>]**\n`Ban` - Ban a user **[-ban <user>]**\n`Unban` - Unban a user **[-unban <user#discrim>]**", inline=False)
         embed.add_field(name="Secret", value="`Eval` - Evaluate code  **[-eval <code>]**\n`Load` - Loads a cog **[-load <cog_name>]**\n`Unload` - Unloads a cog **[-unload <cog_name>]**\n`Reload` - Reloads a cog **[-reload <cog_name>]**", inline=False)
         embed.set_thumbnail(url=ctx.me.avatar_url)
         embed.set_footer(text=f"Requested by: {author}")
+        embed.set_image(url="https://i.imgur.com/BkGe9Lj.png")
         await ctx.send(embed = embed)
 
         
