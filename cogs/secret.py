@@ -57,22 +57,27 @@ class Secret(commands.Cog):
 
     @load.error
     async def load_error(self, ctx, error):
+        embed = discord.Embed(color=0xafdfeb, description="Please provide a cog to load.")
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send('Please provide a cog to load.')
+            await ctx.send(embed = embed)
     @unload.error
     async def unload_error(self, ctx, error):
+        embed = discord.Embed(color=0xafdfeb, description="Please provide a cog to unload.")
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send('Please provide a cog to unload.')
+            await ctx.send(embed = embed)
     @reload.error
     async def reload_error(self, ctx, error):
+        embed = discord.Embed(color=0xafdfeb, description="Please provide a cog to reload.")
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send('Please provide a cog to reload.')
+            await ctx.send(embed = embed)
     @eval.error
     async def eval_error(self, ctx, error):
+        embed = discord.Embed(color=0xafdfeb, description="Please provide some code to evaluate")
+        embed2 = discord.Embed(color=0xafdfeb, description=f'{error}')
         if isinstance(error, commands.MissingRequiredArgument):
-            return await ctx.send('Please provide some code to evaluate')
+            return await ctx.send(embed = embed)
         if isinstance(error, commands.CommandInvokeError):
-            return await ctx.send(f'{error}')
+            return await ctx.send(embed = embed2)
 
 
 def setup(client):

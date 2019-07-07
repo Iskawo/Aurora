@@ -43,10 +43,8 @@ class Miscellaneous(commands.Cog):
 
     
     @commands.command(aliases=["ui"])
-    async def userinfo(self, ctx, member: discord.Member = None):
+    async def userinfo(self, ctx, member: discord.Member):
         ''' - Display information about a user.'''
-        if member is None:
-            return await ctx.send('Please provide a user to get information for.')
         roles = [role for role in member.roles]
         embed = discord.Embed(
             color=0xafdfeb,
@@ -84,6 +82,17 @@ class Miscellaneous(commands.Cog):
         embed.set_footer(text=f"Requested by: {author}")
         embed.set_image(url="https://i.imgur.com/BkGe9Lj.png")
         await ctx.send(embed = embed)
+
+
+
+    @userinfo.error
+    async def userinfo_error(self, ctx, error):
+        embed = discord.Embed(color=0xafdfeb, description="The user you entered was not found")
+        embed2 = discord.Embed(color=0xafdfeb, description="Please provide a user to get information for")
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send(embed = embed2)
+        if isinstance(error, commands.BadArgument):
+            return await ctx.send(embed = embed)
 
         
 
