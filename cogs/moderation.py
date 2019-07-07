@@ -57,6 +57,8 @@ class Moderation(commands.Cog):
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, *, member):
         check = discord.utils.get(self.client.emojis, name="tickYes")
+        x = discord.utils.get(self.client.emojis, name="tickNo")
+        embed = discord.Embed(color=0xafdfeb, description=f"{x} The member you entered is either invalid or not banned.")
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
         for ban_entry in banned_users:
@@ -65,6 +67,34 @@ class Moderation(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f'{check} `{user} ({user.id})` has been unbanned.')
                 return
+        else:
+            return await ctx.send(embed = embed)
+
+    
+    @commands.command(aliases=['bans'])
+    @commands.has_permissions(manage_guild=True)
+    async def listbans(self, ctx):
+        embed = discord.Embed(color=0xafdfeb, description="There's currently no bans in this server.")
+        bans = await ctx.message.guild.bans()
+        embed2 = discord.Embed(color=0xafdfeb, description="The currently active bans for this server are: " + ", ".join(map(str, bans)))
+        if len(bans) == 0:
+            await ctx.send(embed = embed)
+        else:
+            await ctx.send(embed = embed2)
+
+    @listbans.error
+    async def listbans_error(self, ctx, error):
+        x = discord.utils.get(self.client.emojis, name="tickNo")
+        embed2 = discord.Embed(color=0xafdfeb, description=f"{x} You are lacking the `MANAGE_GUILD` permission.")
+        # embed3 = discord.Embed(color=0xafdfeb, description=f"{x} You are unable to kick this user.")
+        # embed4 = discord.Embed(color=0xafdfeb, description=f"{x} The member you entered is invalid.")
+        if isinstance(error, commands.MissingPermissions):
+            return await ctx.send(embed = embed2)
+        # if isinstance(error, commands.CommandInvokeError):
+        #     return await ctx.send(embed = embed3)
+        # if isinstance(error, commands.BadArgument):
+        #     return await ctx.send(embed = embed4)
+
 
 
     @prune.error
