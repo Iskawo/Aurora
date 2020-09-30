@@ -30,7 +30,7 @@ class Miscellaneous(commands.Cog):
         embed = discord.Embed(
             color=0xafdfeb,
             title = "Aurora Information",
-            description = "Here you can find information about me."
+            description = "Information from me."
             )
         embed.add_field(name = "Owner", value = "<@!286509757546758156> (286509757546758156)", inline = "false")
         embed.add_field(name = "Discord.py version", value = f'[{discord.__version__}](https://discordpy.readthedocs.io/en/latest/)', inline = "false")
